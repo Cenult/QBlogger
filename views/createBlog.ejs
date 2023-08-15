@@ -1,0 +1,52 @@
+<%- include("./partials/head.ejs") %>
+
+    <body>
+        <%- include("./partials/header.ejs") %>
+
+            <div class="container">
+                <%- include("./partials/side-menu.ejs") %>
+                    <div class="content">
+                        <div class="center-box">
+                            <form class="blog" action="/createBlog">
+                                <label for="blog-title">Blog Title<input type="text" name="blog-title" minlength="4" maxlength="50"
+                                        id="blog-title" /></label>
+                                        <div class="blog-title error"></div>
+                                <label for="blog-body">Blog Body
+                                    <textarea rows="15" cols="100" minlength="50" maxlength="10000" name="blog-body" id="blog-body"></textarea></label>
+                                        <div class="blog-body error"></div>
+                                <button>Create Blog</button>
+                            </form>
+                        </div>
+                        
+                    </div>
+            </div>
+            
+            <script>
+                document.querySelector("form.blog").addEventListener("submit",async (e)=> {
+                    e.preventDefault();
+                    const blogTitle = document.getElementById("blog-title").value;
+                    const blogBody = document.getElementById("blog-body").value.replace(/\r?\n/g, '<br>');
+                    
+                    console.log("Title:",blogTitle);
+                    console.log("Body:",blogBody);
+
+                    const response = await fetch("/createBlog", {
+                        method:"POST",
+
+                        body:JSON.stringify({"title":blogTitle, "body":blogBody}),
+                        headers: {
+                            "Content-Type": "application/json"
+                        }
+                    })
+                    const data = await response.json();
+                    console.log(data);
+                    if (data.id) {
+                        location.assign("/");
+                    }
+                    if (data.errors){
+                        document.querySelector(".blog-title.error").textContent = data.errors.title;
+                        document.querySelector(".blog-body.error").textContent = data.errors.body;
+                    }
+                })
+            </script>
+    </body>

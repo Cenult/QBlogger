@@ -1,0 +1,32 @@
+<div class="user-details">
+    <div class="profile">
+        <!-- <img src="https://cdn.dribbble.com/users/241590/screenshots/13962756/spotify.jpg" alt="MyImage"> -->
+        <div class="img"></div>
+        <% if (isAuth) { %>
+            <h3><%= user.username %></h3>
+            <h3><%= user.firstname + " " + user.lastname %></h3>
+        <% } else { %>
+            <h3>User</h3>
+        <% } %>
+        
+    </div>
+    <% if (isAuth) { %>
+        <div class="options">
+            <a href="/createBlog"><div class="option">Create a Blog</div></a>
+            <a href="/myBlogs"><div class="option">My Blogs</div></a>
+            <div class="option">Profile</div>
+            <div class="option">Preferences</div>
+            <div class="option">Support Us</div>
+        </div>
+    <% } else { %>
+        <div class="side-login">
+            <form class="login side">
+                <h4>New User? <a href="/signup" class="signup">Sign Up</a></h4>
+                <!-- <label for="username">Username<input type="text" name="username" id="username"></label> -->
+                <label for="email">Email<input type="text" name="email" class="email"><div class="email error"></div></label>
+                <label for="password">Password <input type="text" name="password" class="password"><div class="password error"></div></label>
+                <button class="login">LOGIN</button>
+            </form>
+        </div>
+    <% } %>
+</div>

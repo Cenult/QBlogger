@@ -1,0 +1,125 @@
+<%- include("./partials/head.ejs") %>
+
+<body>
+    <%- include("./partials/header.ejs") %>
+
+    <div class="container">
+        <%- include("./partials/side-menu.ejs") %>
+        <div class="content">
+            <% if (blogs.length>= 1) { %> <% for (let blog of blogs) { %>
+            <div class="blog" id=<%= blog._id %>
+                >
+                <div class="heading">
+                    <h2><%= blog.title %></h2>
+                    <span class="username" id=<%= user._id %>> <%= user.username %></span>
+                </div>
+                <div><%- blog.body %></div>
+                <div class="review">
+                    <button data-blogid=<%= blog._id %>
+                        class="upvote" data-update="upvote"><i
+                            class="fa-solid fa-arrow-turn-up"
+                        ></i
+                        >Upvote<span> <%= blog.upvotes %> </span></button
+                    ><button data-blogid=<%= blog._id %>
+                        class="downvote" data-update="downvote"><i
+                            class="fa-solid fa-arrow-turn-down"
+                        ></i
+                        >Downvote<span> <%= blog.downvotes %> </span></button
+                    ><button data-blogid=<%= blog._id %>
+                        class="comment"><i class="fa-regular fa-comments"></i
+                        >Comment<span> <%= blog.comments %> </span>
+                    </button>
+                </div>
+            </div>
+            <% } } else {%>
+            <div class="center-box">
+                <h1>No Blogs found</h1>
+            </div>
+
+            <% } %>
+            <script>
+                document
+                    .querySelector(".content")
+                    .addEventListener("click", async (e) => {
+                        e.preventDefault();
+                        if (e.target.dataset.blogid) {
+                            e.target.classList.toggle("active");
+                            if (!e.target.classList.contains("comment")) {
+                                const voteCount = parseInt(e.target.querySelector(
+                                                    "span"
+                                                ).textContent);
+                                console.log("Vote Count:",voteCount);
+                                try {
+                                    const response = await fetch(
+                                        "/updateVote",
+                                        {
+                                            method: "PUT",
+                                            body: JSON.stringify({
+                                                count:voteCount , update: e.target.dataset.update, blogid: e.target.dataset.blogid
+                                            }),
+                                            headers: {
+                                                "Content-Type":
+                                                    "application/json",
+                                            },
+                                        }
+                                    );
+                                    const data =  await response.json();
+                                    console.log(data);
+                                    if (data.errors){
+                                        console.log(data);
+                                    } else {
+                                        e.target.querySelector(
+                                                    "span"
+                                                ).textContent = data[e.target.dataset.update+"s"];
+                                                console.log(data[e.target.dataset.update+"s"]);
+                                    }
+                                } catch (error) {
+                                    console.log(error);
+                                }
+                            }
+
+                            
+                        } else if (e.target.parentElement.dataset.blogid) {
+                            e.target.parentElement.classList.toggle("active");
+                            if (!e.target.parentElement.classList.contains("comment")) {
+                                const voteCount = parseInt(e.target.parentElement.querySelector(
+                                                    "span"
+                                                ).textContent);
+                                console.log("Vote Count:",voteCount);
+                                try {
+                                    const response = await fetch(
+                                        "/updateVote",
+                                        {
+                                            method: "PUT",
+                                            body: JSON.stringify({
+                                                count:voteCount , update: e.target.parentElement.dataset.update, blogid: e.target.parentElement.dataset.blogid
+                                            }),
+                                            headers: {
+                                                "Content-Type":
+                                                    "application/json",
+                                            },
+                                        }
+                                    );
+                                    const data = await response.json();
+                                   
+                                        
+                                    if (data.errors){
+                                        console.log(data);
+                                    } else {
+                                        e.target.parentElement.querySelector(
+                                                    "span"
+                                                ).textContent = data[e.target.parentElement.dataset.update+"s"];
+                                        console.log(data[e.target.parentElement.dataset.update+"s"]);
+                                    }
+                                } catch (error) {
+                                    console.log(error);
+                                }
+                            }
+                            
+
+                        }
+                    });
+            </script>
+        </div>
+    </div>
+</body>

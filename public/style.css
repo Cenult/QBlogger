@@ -1,0 +1,331 @@
+/* Presets */
+:root {
+    --color-primary: rgb(255, 69, 8);
+    --color-secondary: rgb(255, 98, 7);
+    --color-tertiary: rgb(240, 141, 88);
+    --color-quaternary: rgba(238, 199, 177, 0.398);
+    --color-quinary: rgb(255, 255, 255);
+    --color-senary: rgba(205, 205, 205, 0.499);
+    --color-septenary: rgba(97, 97, 97, 0.438);
+    --color-octonary: rgb(19, 19, 19);
+
+    --nav-font-size: 24px;
+    --width-page: 1100px;
+    --header-height: 80px;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Header CSS */
+header {
+    background: linear-gradient(
+        45deg,
+        var(--color-primary),
+        var(--color-secondary)
+    );
+    display: flex;
+    justify-content: center;
+    height: var(--header-height);
+}
+header nav {
+    display: flex;
+    padding: 10px;
+    justify-content: space-between;
+    align-items: center;
+    width: var(--width-page);
+}
+header nav a {
+    color: var(--color-quinary);
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: var(--nav-font-size);
+}
+header nav li {
+    list-style: none;
+    display: inline-block;
+    margin: 0px 5px;
+}
+header nav > div {
+    display: flex;
+    column-gap: 20px;
+}
+
+/* Body CSS */
+body {
+    height: 100vh;
+    overflow: hidden;
+    /* border: 5px solid rgb(255, 27, 27); */
+}
+body::before {
+    content: "";
+    position: absolute;
+    background-image: repeating-linear-gradient(
+        45deg,
+        var(--color-senary) 0px,
+        var(--color-senary) 10vw,
+        var(--color-quinary) 0px,
+        var(--color-quinary) 20vw
+    );
+    width: 100vw;
+    height: 100%;
+    z-index: 1;
+    opacity: 0.3;
+    pointer-events: none;
+}
+.container {
+    width: var(--width-page);
+    height: calc(100vh - var(--header-height));
+    margin: 0px auto;
+    display: grid;
+    grid-template-columns: 2fr 8fr;
+    /* column-gap: 5px; */
+    overflow: hidden;
+}
+.container::before {
+    content: "";
+    position: absolute;
+    background-color: var(--color-quinary);
+    /* background-image: linear-gradient(-90deg, rgb(223, 218, 250), rgb(162, 170, 244));  */
+    width: inherit;
+    height: inherit;
+    z-index: -1;
+    opacity: 0.5;
+}
+
+.container .user-details {
+    /* overflow: hidden; */
+    overflow-y: auto;
+    /* border: 1px solid black; */
+    background-color: var(--color-quaternary);
+}
+.user-details .profile .img {
+    background-image: url("https://cdn.dribbble.com/users/241590/screenshots/13962756/spotify.jpg");
+    width: 100px;
+    height: 100px;
+    background-position: center;
+    border-radius: 50px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin: 10px auto;
+}
+.user-details .profile h3 {
+    text-align: center;
+}
+.user-details .options {
+    margin: 20px 0px;
+}
+.options .option {
+    font-size: 30px;
+    padding: 5px;
+    padding-left: 10px;
+    margin: 5px;
+    border-top: 2px solid rgba(0, 0, 0, 0.332);
+    border-bottom: 2px solid rgba(0, 0, 0, 0.441);
+    background-image: linear-gradient(
+        var(--color-septenary),
+        var(--color-senary),
+        var(--color-septenary)
+    );
+}
+
+/* nav li#signup {
+    
+    color: ;
+} */
+nav li#signup a {
+    background-color: var(--color-quinary);
+    color: var(--color-primary);
+}
+.side-login {
+    align-self: flex-end;
+}
+.side-login form.login {
+    margin: 30px 5px 0px;
+    padding: 10px;
+    border: 2px solid var(--color-secondary);
+    border-radius: 5px;
+}
+.side-login form.login h4 {
+    display: block;
+    margin: 10px auto;
+    display: flex;
+    justify-content: space-between;
+}
+.side-login form.login a {
+    color: var(--color-primary);
+    font: inherit;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+}
+.side-login form.login label {
+    display: flex;
+    font-size: large;
+    flex-direction: column;
+}
+.side-login form.login label input {
+    border: 2px solid var(--color-secondary);
+    padding: 5px 2px;
+}
+.side-login form.login button.login {
+    color: var(--color-quinary);
+    font-size: 1em;
+    font-weight: 550;
+    width: 100%;
+    margin: 10px auto;
+    background-color: var(--color-primary);
+    padding: 5px;
+}
+
+/* .content styles */
+.container .content {
+    position: relative;
+    color: var(--color-octonary);
+    overflow: auto;
+    z-index: 2;
+}
+
+.content .center-box {
+    position: absolute;
+    background-color: var(--color-secondary);
+    /* background-color: rgb(69, 65, 63); */
+    color: var(--color-quinary);
+    background-blend-mode: difference;
+    inset: 10px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Center Box */
+.center-box form {
+    background-color: white;
+    color: rgb(31, 29, 29);
+    font-weight: 600;
+}
+
+.center-box form span.link {
+    color: var(--color-secondary);
+}
+.center-box form {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    padding: 25px;
+    border-radius: 10px;
+    font-size: large;
+}
+.center-box form div {
+    display: flex;
+    justify-content: space-between;
+    gap: 5px;
+}
+.center-box form label {
+    display: flex;
+    color: rgb(90, 77, 77);
+    flex-direction: column;
+    margin: 10px 0px 5px;
+    font-weight: 550;
+}
+.center-box form input {
+    border: 2px solid var(--color-secondary);
+    padding: 5px 2px;
+    border-radius: 2px;
+    margin: 2px 0px;
+}
+textarea {
+    border: 2px solid var(--color-secondary);
+    padding: 5px 2px;
+    border-radius: 2px;
+    margin: 2px 0px;
+}
+.center-box button {
+    color: var(--color-quinary);
+    font-size: 1em;
+    font-weight: 550;
+    width: 100%;
+    margin: 10px auto 0px;
+    background-color: var(--color-secondary);
+    padding: 5px;
+    border-radius: 5px;
+}
+.center-box form > div {
+    margin-bottom: 10px;
+}
+.center-box input.email {
+    min-width: 250px;
+}
+
+/* ERRORS */
+.error {
+    color: rgb(248, 43, 32);
+    font-size: 15px;
+    font-weight: 600;
+}
+
+/* Blogs */
+div.blog {
+    padding: 10px;
+    margin: 5px 0px;
+    background-color: rgb(249, 209, 189);
+    background: linear-gradient(45deg, rgb(249, 209, 189), rgb(245, 233, 227));
+}
+div.blog div.heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+}
+div.blog div.heading span {
+    align-self: flex-end;
+}
+div.blog div.review {
+    background-color: rgb(255, 255, 255);
+    background: linear-gradient(90deg, rgb(56, 124, 243), rgb(52, 85, 168));
+    /* border-radius: 10px; */
+    /* padding: 0px 10px; */
+    display: flex;
+    /* justify-content: space-between; */
+    column-gap: 100px;
+    margin: 10px 0px 0px;
+}
+div.review button {
+    color: var(--color-quinary);
+    font-size: 0.8em;
+    font-weight: 550;
+    display: flex;
+    column-gap: 5px;
+    border: none;
+    background-color: rgb(56, 124, 243);
+    padding: 5px;
+    cursor: pointer;
+}
+.blog .active {
+    background-color: rgb(14, 27, 50);
+}
+
+/* Scrollbar Settings */
+::-webkit-scrollbar {
+    width: 10px;
+    margin-block: 2px;
+}
+::-webkit-scrollbar-track {
+    background-color: transparent;
+    border-radius: 5px;
+}
+::-webkit-scrollbar-thumb {
+    background-color: rgb(255, 60, 0);
+    border-radius: 5px;
+}

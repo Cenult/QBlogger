@@ -1,0 +1,74 @@
+<%- include("./partials/head.ejs") %>
+
+<body>
+    <%- include("./partials/header.ejs") %>
+
+    <div class="container">
+        <%- include("./partials/side-menu.ejs") %>
+
+        <div class="content">
+            <div class="center-box">
+                <form action="/signup" class="signup">
+                    <div>
+                        <span>Already Registered?</span
+                        ><span class="link"><a href="/login">Login</a></span>
+                    </div>
+                    <label for="username"
+                        >Username<input
+                            type="text"
+                            class="username"
+                            name="username"
+                            placeholder="Username" required
+                    />
+                        <div class="username error"></div>
+                    </label>
+                    <label for="firstname"
+                        >Full Name
+                        <div>
+                            <input
+                                type="text"
+                                placeholder="First Name"
+                                name="firstname"
+                                id="firstname" required
+                            />
+                            <input
+                                type="text"
+                                placeholder="Last Name"
+                                name="firstname"
+                                id="lastname" required
+                            /></div
+                    ><div class="name error"></div>
+                </label>
+                    <label for="email"
+                        >Email<input
+                            type="email"
+                            name="email"
+                            class="email"
+                            placeholder="Email" required
+                    />
+                        <div class="email error"></div>        
+                    </label>
+                    <label for="password"
+                        >Password
+                        <div>
+                            <input
+                                type="password"
+                                name="password"
+                                class="password"
+                                placeholder="Password" required
+                            /><input
+                                type="password"
+                                name="confirm-password"
+                                class="confirm-password"
+                                placeholder="Confirm Password" required
+                            />
+                            
+                        </div>
+                        <div class="password error"></div>
+                    </label>
+                    <button>Sign Up</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>

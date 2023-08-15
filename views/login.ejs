@@ -1,0 +1,44 @@
+<%- include("./partials/head.ejs") %>
+
+<body>
+    <%- include("./partials/header.ejs") %>
+
+    <div class="container">
+        <%- include("./partials/side-menu.ejs") %>
+
+        <div class="content">
+            <div class="center-box">
+                <form action="/login" class="login center">
+                    <div>
+                        <span>New User?</span
+                        ><span class="link"><a href="/signup">Sign Up</a></span>
+                    </div>
+                    
+                    
+                    <label for="email"
+                        >Email<input
+                            type="email"
+                            name="email"
+                            class="email"
+                            placeholder="Email" required
+                    />
+                        <div class="email error"></div>
+                    </label>
+                    <label for="password"
+                        >Password
+                      
+                            <input
+                                type="password"
+                                name="password"
+                                class="password"
+                                placeholder="Password" required
+                            />
+                            <div class="password error"></div>
+                       
+                    </label>
+                    <button>LOGIN</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
