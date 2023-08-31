@@ -57,7 +57,12 @@ const userSchema = new Schema({
     upvotes: {
         type : [String],
         default: []
+    },
+    googleid: {
+        type:String,
+        default:null
     }
+
 }, {timestamps: true})
 
 // static methods for user model

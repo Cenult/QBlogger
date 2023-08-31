@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const cookieParser = require("cookie-parser");
 
+
 //Routes
 const homeRoute = require("./routes/homeRoute");
 const authRoute = require("./routes/authRoute");
@@ -12,12 +13,15 @@ const {authUser, checkAuth} = require("./middleware/authMiddleware");
 
 // One time settings
 dotenv.config({path: "./config.env"});
+// dotenv.config();
 const app = express();
 app.set("view engine", "ejs");
+// const passport = require("passport");
+const passportSetup = require("./config/passport-setup");
 
 // Starting server
 mongoose.connect(process.env.DATABASE_URL).then(() => {
-    app.listen(process.env.PORT || 3000, () => {
+    app.listen(process.env.PORT || 80, () => {
         console.log("Server has started");
     })
 }).catch(error => {
@@ -28,12 +32,16 @@ mongoose.connect(process.env.DATABASE_URL).then(() => {
 app.use(express.json());
 app.use(express.static("public"));
 app.use(cookieParser());
+// app.use(passport.initialize());
+// app.use(passport.session());
 
 // handlers
 app.all("*",authUser);
 app.use("/",homeRoute);
 app.use("/",authRoute);
-app.use("/",checkAuth, blogRoute);
+app.use("/", blogRoute);
+
+
 
 app.all("*", (req, res) => {
     res.status(404);

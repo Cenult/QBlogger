@@ -1,5 +1,6 @@
 const UserModel = require("../models/userModel");
 const jwt = require("jsonwebtoken");
+// const passport = require("passport");
 
 const maxAge = 3 * 24 * 60 * 60;
 
@@ -57,7 +58,7 @@ exports.login_post = async (req, res) => {
     // res.json({response:"Logged In"});
 }
 exports.signup_get =  (req, res) => {
-    console.log(req.body);
+    
     res.render("signup", {title: "Sign Up"})
 
     
@@ -88,5 +89,19 @@ exports.signup_post = async(req, res) => {
 }
 exports.logout_get = (req, res)=> {
     res.cookie("jwt", "", {maxAge: 1});
+    res.redirect("/");
+}
+
+// Google Auth
+exports.google_get = (req, res) => {
+    // Handle with PASSPORT
+    console.log("Google Requested");
+    res.redirect("/");
+}
+
+exports.redirect_get = (req, res) => {
+    const token = createToken(req.user.id);
+    console.log(req.user);
+    res.cookie("jwt", token, { maxAge: maxAge * 1000, httpOnly: true });
     res.redirect("/");
 }

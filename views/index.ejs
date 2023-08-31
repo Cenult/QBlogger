@@ -25,10 +25,39 @@
                             class="fa-solid fa-arrow-turn-down"
                         ></i
                         >Downvote<span> <%= blog.downvotes %> </span></button
-                    ><button data-blogid=<%= blog._id %>
+                    ><button data-blogid=<%= blog.id %>
                         class="comment"><i class="fa-regular fa-comments"></i
                         >Comment<span> <%= blog.comments %> </span>
                     </button>
+                    
+                </div>
+                <div class="comment-section hidden">
+                    <% if (user) { %>
+                    <form class="new-comment" action="/comments/postComment/<%= blog.id %>">
+
+                        <label for="comment-content" class="comment label"><textarea rows="3" cols="70" minlength="1" maxlength="1000" name="comment-content" id="comment-content"></textarea><span><%= user.username %></span></label>
+                        
+                        <button type="submit" data-blogid=<%= blog.id %> class="post-comment">Post Comment</button>
+                        <div class="comment-post success"></div>
+                        <div class="comment-post error"></div>
+                    </form>
+                    
+
+                    <% } %>
+                    <div class="comments-container"><span>Comments</span>
+
+                       
+                            <!-- <div class="comments">
+
+                                    <span class=".comment.username"> comment.username </span>
+                                    <div class=".comment.content">comment.content</div>
+                    
+                            </div>
+                        -->
+                            
+
+                    </div>
+
                 </div>
             </div>
             <% } } else {%>
@@ -37,89 +66,8 @@
             </div>
 
             <% } %>
-            <script>
-                document
-                    .querySelector(".content")
-                    .addEventListener("click", async (e) => {
-                        e.preventDefault();
-                        if (e.target.dataset.blogid) {
-                            e.target.classList.toggle("active");
-                            if (!e.target.classList.contains("comment")) {
-                                const voteCount = parseInt(e.target.querySelector(
-                                                    "span"
-                                                ).textContent);
-                                console.log("Vote Count:",voteCount);
-                                try {
-                                    const response = await fetch(
-                                        "/updateVote",
-                                        {
-                                            method: "PUT",
-                                            body: JSON.stringify({
-                                                count:voteCount , update: e.target.dataset.update, blogid: e.target.dataset.blogid
-                                            }),
-                                            headers: {
-                                                "Content-Type":
-                                                    "application/json",
-                                            },
-                                        }
-                                    );
-                                    const data =  await response.json();
-                                    console.log(data);
-                                    if (data.errors){
-                                        console.log(data);
-                                    } else {
-                                        e.target.querySelector(
-                                                    "span"
-                                                ).textContent = data[e.target.dataset.update+"s"];
-                                                console.log(data[e.target.dataset.update+"s"]);
-                                    }
-                                } catch (error) {
-                                    console.log(error);
-                                }
-                            }
-
-                            
-                        } else if (e.target.parentElement.dataset.blogid) {
-                            e.target.parentElement.classList.toggle("active");
-                            if (!e.target.parentElement.classList.contains("comment")) {
-                                const voteCount = parseInt(e.target.parentElement.querySelector(
-                                                    "span"
-                                                ).textContent);
-                                console.log("Vote Count:",voteCount);
-                                try {
-                                    const response = await fetch(
-                                        "/updateVote",
-                                        {
-                                            method: "PUT",
-                                            body: JSON.stringify({
-                                                count:voteCount , update: e.target.parentElement.dataset.update, blogid: e.target.parentElement.dataset.blogid
-                                            }),
-                                            headers: {
-                                                "Content-Type":
-                                                    "application/json",
-                                            },
-                                        }
-                                    );
-                                    const data = await response.json();
-                                   
-                                        
-                                    if (data.errors){
-                                        console.log(data);
-                                    } else {
-                                        e.target.parentElement.querySelector(
-                                                    "span"
-                                                ).textContent = data[e.target.parentElement.dataset.update+"s"];
-                                        console.log(data[e.target.parentElement.dataset.update+"s"]);
-                                    }
-                                } catch (error) {
-                                    console.log(error);
-                                }
-                            }
-                            
-
-                        }
-                    });
-            </script>
+            <script src="/blog.js"></script>
+            <script src="/comment.js"> </script>
         </div>
     </div>
 </body>

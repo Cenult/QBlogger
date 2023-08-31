@@ -108,7 +108,8 @@ body::before {
     background-color: var(--color-quaternary);
 }
 .user-details .profile .img {
-    background-image: url("https://cdn.dribbble.com/users/241590/screenshots/13962756/spotify.jpg");
+    /* background-image: url("https://cdn.dribbble.com/users/241590/screenshots/13962756/spotify.jpg"); */
+    background-image: url("https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ffreesvg.org%2Fimg%2Fabstract-user-flat-3.png&f=1&nofb=1&ipt=6a5097e1a29ad240619357591d0ac54063fa5095bad48f5890b8285db9ea690a&ipo=images");
     width: 100px;
     height: 100px;
     background-position: center;
@@ -160,7 +161,7 @@ nav li#signup a {
     display: flex;
     justify-content: space-between;
 }
-.side-login form.login a {
+.side-login form.login a:not(.google) {
     color: var(--color-primary);
     font: inherit;
     background-color: transparent;
@@ -227,7 +228,7 @@ nav li#signup a {
     border-radius: 10px;
     font-size: large;
 }
-.center-box form div {
+.center-box form div:not(.google) {
     display: flex;
     justify-content: space-between;
     gap: 5px;
@@ -274,6 +275,11 @@ textarea {
     font-size: 15px;
     font-weight: 600;
 }
+.success {
+    color: rgb(8, 119, 4);
+    font-size: 15px;
+    font-weight: 600;
+}
 
 /* Blogs */
 div.blog {
@@ -314,6 +320,117 @@ div.review button {
 }
 .blog .active {
     background-color: rgb(14, 27, 50);
+}
+
+/* Google Auth */
+a.google {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    z-index: 5;
+    /* margin: auto */
+    padding: 10px 5px;
+    margin-bottom: 10px;
+    font-size: 15px;
+    font-weight: bold;
+    text-align: center;
+    background-color: white;
+    align-items: center;
+    justify-content: center;
+    column-gap: 5px;
+    border-radius: 3px;
+    cursor: pointer;
+    box-shadow: 2px 2px 10px rgb(197, 193, 193);
+}
+a.google div.g-background {
+    width: 20px;
+    height: 20px;
+    background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/2008px-Google_%22G%22_Logo.svg.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Comment Section */
+.comment-section {
+    display: flex;
+    flex-direction: column;
+    background: white;
+}
+
+.hidden {
+    display: none;
+}
+form.new-comment {
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+    background-color: rgb(232, 240, 255);
+    padding: 10px;
+    margin: 10px 0px;
+}
+
+.comment.label {
+    display: flex;
+    justify-content: space-between;
+
+}
+.comment.label span {
+    color: var(--color-primary);
+    font-weight:bold;
+}
+form.new-comment button {
+    padding: 10px;
+    width: 200px;
+
+    background: var(--color-primary);
+    color: aliceblue;
+}
+.comments-container {
+    padding: 10px;
+}
+.comments-container>span {
+    color: blue;
+    font-size: 30px;
+    
+}
+.comments-container .comment-container {
+    background: rgb(246, 246, 233);
+    padding: 10px;
+    margin:10px 0px;
+    
+}
+.comments-container .comment-container .username {
+    color: red;
+}
+.comments-container .comment-container .content {
+    color: blue;
+}
+
+
+/* About Us page */
+.image-container {
+    height: 200px;
+    width: 200px;
+    background-image: url("./MyPhoto.jpg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-clip: border-box;
+    border-radius: 100px;
+
+}
+.profile    {
+    margin: 20px;
+    text-align: center;
+}
+.profile .links {
+    margin: 30px 0px;
+    font-size: 20px;
+}
+.profile .links a {
+    text-decoration: none;
+    color: rgb(246, 255, 126);
 }
 
 /* Scrollbar Settings */

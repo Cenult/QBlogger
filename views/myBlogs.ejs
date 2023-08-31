@@ -3,26 +3,70 @@
     <body>
         <%- include("./partials/header.ejs") %>
 
-            <div class="container">
-                <%- include("./partials/side-menu.ejs") %>
-                    <div class="content">
-                        <div class="blog" id="1234567890">
-                            <div class="heading"><h2>My First Blog</h2><span><%= user.username %></span></div>
-                            <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid culpa doloremque incidunt totam, neque minima rem aut voluptas maxime excepturi amet voluptatibus voluptate!</div>
-                            <div class="review"><button><i class="fa-solid fa-arrow-turn-up"></i>Upvote<span>30</span></button><button><i class="fa-solid fa-arrow-turn-down"></i>Downvote<span>30</span></button><button><i class="fa-regular fa-comments"></i>Comment<span>30</span></button></div>
-                        </div>
-                        <div class="blog" id="1234567890">
-                            <div class="heading"><h2>My First Blog</h2><span><%= user.username %></span></div>
-                            <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid culpa doloremque incidunt totam, neque minima rem aut voluptas maxime excepturi amet voluptatibus voluptate!</div>
-                            <div class="review"><button><i class="fa-solid fa-arrow-turn-up"></i>Upvote<span>30</span></button><button><i class="fa-solid fa-arrow-turn-down"></i>Downvote<span>30</span></button><button><i class="fa-regular fa-comments"></i>Comment<span>30</span></button></div>
-                        </div>
-                        <div class="blog" id="1234567890">
-                            <div class="heading"><h2>My First Blog</h2><span><%= user.username %></span></div>
-                            <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid culpa doloremque incidunt totam, neque minima rem aut voluptas maxime excepturi amet voluptatibus voluptate!</div>
-                            <div class="review"><button><i class="fa-solid fa-arrow-turn-up"></i>Upvote<span>30</span></button><button><i class="fa-solid fa-arrow-turn-down"></i>Downvote<span>30</span></button><button><i class="fa-regular fa-comments"></i>Comment<span>30</span></button></div>
-                        </div>
+    <div class="container">
+        <%- include("./partials/side-menu.ejs") %>
+        <div class="content">
+            <% if (blogs.length>= 1) { %> <% for (let blog of blogs) { %>
+            <div class="blog" id=<%= blog._id %>
+                >
+                <div class="heading">
+                    <h2><%= blog.title %></h2>
+                    <span class="username" id=<%= blog.userid %>> <%= blog.username %></span>
+                </div>
+                <div><%- blog.body %></div>
+                <div class="review">
+                    <button data-blogid=<%= blog._id %>
+                        class="upvote" data-update="upvote"><i
+                            class="fa-solid fa-arrow-turn-up"
+                        ></i
+                        >Upvote<span> <%= blog.upvotes %> </span></button
+                    ><button data-blogid=<%= blog._id %>
+                        class="downvote" data-update="downvote"><i
+                            class="fa-solid fa-arrow-turn-down"
+                        ></i
+                        >Downvote<span> <%= blog.downvotes %> </span></button
+                    ><button data-blogid=<%= blog._id %>
+                        class="comment"><i class="fa-regular fa-comments"></i
+                        >Comment<span> <%= blog.comments %> </span>
+                    </button>
+                </div>
+                <div class="comment-section hidden">
+                    <% if (user) { %>
+                    <form class="new-comment" action="/comments/postComment/<%= blog.id %>">
+
+                        <label for="comment-content" class="comment label"><textarea rows="3" cols="70" minlength="1" maxlength="1000" name="comment-content" id="comment-content"></textarea><span><%= user.username %></span></label>
+                        
+                        <button type="submit" data-blogid=<%= blog.id %> class="post-comment">Post Comment</button>
+                        <div class="comment-post success"></div>
+                        <div class="comment-post error"></div>
+                    </form>
+                    
+
+                    <% } %>
+                    <div class="comments-container"><span>Comments</span>
+
                        
+                            <!-- <div class="comments">
+
+                                    <span class=".comment.username"> comment.username </span>
+                                    <div class=".comment.content">comment.content</div>
+                    
+                            </div>
+                        -->
+                            
+
                     </div>
+
+                </div>
             </div>
+            <% } } else {%>
+            <div class="center-box">
+                <h1>No Blogs found</h1>
+            </div>
+
+            <% } %>
+            <script src="/blog.js"></script>
+        </div>
+    </div>
            
     </body>

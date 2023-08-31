@@ -7,6 +7,10 @@ const commentSchema = new Schema({
         type:String,
         required: true
     },
+    username: {
+        type: String,
+        required : true
+    },
     blogid: {
         type: String,
         required: true
@@ -26,6 +30,6 @@ const commentSchema = new Schema({
     }
 },{timestamps: true})
 
-const BlogModel = mongoose.model("blog", blogSchema);
+const CommentModel = mongoose.model("comment", commentSchema);
 
-module.exports = BlogModel;
+module.exports = CommentModel;
